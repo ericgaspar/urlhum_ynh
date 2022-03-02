@@ -39,8 +39,8 @@
             {
                 "name": "path",
                 "type": "path",
-                "example": "/example",
-                "default": "/example"
+                "example": "/urlhum",
+                "default": "/urlhum"
             },
             {
                 "name": "is_public",
