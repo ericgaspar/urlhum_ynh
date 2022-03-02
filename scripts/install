@@ -60,6 +60,8 @@ ynh_app_setting_set --app=$app --key=language --value=$language
 ynh_script_progression --message="Installing dependencies..." --time --weight=1
 
 ynh_install_app_dependencies $pkg_dependencies
+# Install Nodejs
+ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
 
 #=================================================
 # CREATE DEDICATED USER
@@ -135,6 +137,9 @@ ynh_script_progression --message="Install BookStack" --weight=5
 
 pushd $final_path
 	php$phpversion artisan key:generate --no-interaction --force
+	ynh_use_nodejs
+	npm install
+	npm run prod
 	php$phpversion artisan migrate --no-interaction --force
 	php$phpversion artisan db:seed
 	php$phpversion artisan settings:set
